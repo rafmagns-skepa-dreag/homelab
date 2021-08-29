@@ -72,9 +72,9 @@ job "hashi-ui" {
 
       env {
         NOMAD_ENABLE = 1
-        NOMAD_ADDR   = "http://192.168.1.3:4646"
+        NOMAD_ADDR   = "http://192.168.2.14:4646"
         CONSUL_ENABLE = 1
-        CONSUL_ADDR = "http://192.168.1.3:8500"  # they run on the same server
+        CONSUL_ADDR = "http://192.168.2.14:8500"  # they run on the same server
       }
 
       resources {

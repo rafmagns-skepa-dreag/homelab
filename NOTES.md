@@ -7,11 +7,11 @@ sudoedit /boot/firmware/cmdline.txt and add cgroup_enable=memory cgroup_memory=1
 
 sudoedit /etc/systemd/resolved.conf
 [Resolve]
-DNS=192.168.1.3
+DNS=192.168.2.14
 Domains=~consul
 
 # port 53 requires root
-sudo /home/ubuntu/.bin/consul agent -dev -config-dir consul.d/ -client 192.168.1.3 -dns-port 53
+sudo /home/ubuntu/.bin/consul agent -dev -config-dir consul.d/ -client 192.168.2.14 -dns-port 53
 sudo $HOME/.bin/nomad agent -config nomad.hcl
 sudo $HOME/.bin/nomad agent -client -config nomad-cluster.hcl
 vault server -config=vault/config
@@ -32,3 +32,12 @@ this installs dnsmasq. make sure that 192.168.1.1 (router IP) is in /etc/resolv.
 
 4/29
 make sure that ports 80 and 443 are forwarded on the router
+
+8/22
+you can add the old network so that you can boot and then update the config :facepalm:
+updated:
+  * pi server IP
+  * router IP
+  * IP for rhlabs.us at NoIP (UDM will only auto-update on IP change/restart)
+port forwarding: 
+  * 80, 443

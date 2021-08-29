@@ -12,13 +12,13 @@ log_level = "INFO"
 
 vault {
   enabled = true
-  # token = ""
+  token = "{{ nomad_vault_token }}"
   create_from_role = "nomad-cluster"
   address = "http://127.0.0.1:8200"
 }
 
 consul {
-  address = "192.168.1.3:8500"
+  address = "192.168.2.14:8500"
   verify_ssl = false
   server_service_name = "nomad"
   client_service_name = "nomad-client"
@@ -29,9 +29,17 @@ consul {
 
 client {
   enabled = true
-  servers = ["192.168.1.3"]
+  servers = ["192.168.2.14"]
   host_volume "mariadb" {
     path = "/home/ubuntu/mariadb"
+    read_only = false
+  }
+  host_volume "dnsmasq" {
+    path = "/etc/dnsmasq.d"
+    read_only = false
+  }
+  host_volume "pihole" {
+    path = "/etc/pihole"
     read_only = false
   }
 }

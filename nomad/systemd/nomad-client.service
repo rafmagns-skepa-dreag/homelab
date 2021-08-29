@@ -1,0 +1,17 @@
+[Unit]
+Description=Nomad Client
+Requires=consul-online.target
+Requires=nomad.service
+After=consul-online.target
+
+[Service]
+Restart=on-failure
+EnvironmentFile=/etc/nomad.d/nomad.conf
+ExecStart=/usr/local/bin/nomad agent -config /etc/nomad.d/nomad-client.hcl $FLAGS
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGTERM
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
